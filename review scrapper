@@ -1,0 +1,33 @@
+import requests
+from bs4 import BeautifulSoup
+
+# Fetch page content
+request1=requests.get('https://www.flipkart.com/poco-c31-royal-blue-64-gb/p/itm19effae969b86')
+request1
+request1.content
+
+# Step 3: Create a BeautifulSoup object from the page content
+soup = BeautifulSoup(request1.content, 'html.parser')
+
+#Fetching Reviews Or Comments
+reviews = soup.find_all('div', {'class': 'ZmyHeo'})
+for review in reviews:
+    print(review.get_text() + "\n\n")
+
+#Fetching Overall Ratings
+ratings=soup.find('div' ,{'class' : 'ipqd2A'}).get_text();
+print(ratings)
+
+#Fetching Individual Ratings
+rating = soup.find_all('div', {'class': 'XQDdHH Ga3i8K'})
+for rating1 in rating:
+    print(rating1.get_text() +"\n\n")
+
+#Fetching Tags
+tag=soup.find('span' ,{'class' : '_6EBuvT OHdLLG'}).get_text();
+tag
+
+#Fetching Customer Name
+cus_name= soup.find_all('p' ,{'class' : '_2NsDsF AwS1CA'});
+for customer in cus_name:
+    print(customer.get_text() +"\n\n");
